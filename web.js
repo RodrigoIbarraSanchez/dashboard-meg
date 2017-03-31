@@ -5,7 +5,7 @@ var path = require("path")
 
 // Settings
 var app = express()
-app.set('port', 5000)
+app.set('port', process.env.PORT || 5000)
 app.set('view engine', 'pug')
 app.use(morgan("dev"))
 
