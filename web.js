@@ -1,16 +1,27 @@
 // Dependencies
 var express = require('express')
+router = express.Router();
 var morgan = require("morgan")
 var path = require("path")
+var mongoose = require('mongoose')
+
+var appRoutes = require('./routes/app');
 
 // Settings
 var app = express()
+mongoose.connect('mongodb://localhost/test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    // we're connected!
+    console.log('Conectado a la BD')
+});
 app.set('port', process.env.PORT || 5000)
 app.set('view engine', 'pug')
 app.use(morgan("dev"))
 
 // Public folder
-app.use(express.static(path.join(__dirname, "../public")))
+app.set('views', path.join(__dirname, 'views'))
 
 app.get('/', function (req, res) {
     res.render(
