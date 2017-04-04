@@ -4,11 +4,14 @@ router = express.Router();
 var morgan = require("morgan")
 var path = require("path")
 var mongoose = require('mongoose')
+var bodyParser = require("body-parser")
+var cors = require('cors')
 
-var appRoutes = require('./routes/app');
+var apiRouter = require('./routes/apiRouter');
 
 // Settings
 var app = express()
+
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -16,12 +19,18 @@ db.once('open', function() {
     // we're connected!
     console.log('Conectado a la BD')
 });
+
 app.set('port', process.env.PORT || 5000)
 app.set('view engine', 'pug')
 app.use(morgan("dev"))
+app.use(cors())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
 
 // Public folder
 app.set('views', path.join(__dirname, 'views'))
+
+app.use("/api", apiRouter)
 
 app.get('/', function (req, res) {
     res.render(
