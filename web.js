@@ -32,6 +32,7 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use("/api", apiRouter)
 
+
 app.get('/', function (req, res) {
     res.render(
         'index',

@@ -24,7 +24,7 @@ User.find({}, function(err, users) {
 */
 
 router.get('/', function(req, res, next) {
-    res.render('index')
+    console.log(res)
 });
 
 router.post('/', function(req, res, next) {
