@@ -30,10 +30,12 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     
     var email = req.body.email
+    var firstName = req.body.firstName
+    var lastName = req.body.lastName
 
     var user = new User({
-        firstName:'Rodrigo',
-        lastName: 'Ibarra',
+        firstName: firstName,
+        lastName: lastName,
         email: email
     })
 

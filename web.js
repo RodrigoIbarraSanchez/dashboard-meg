@@ -12,7 +12,7 @@ var apiRouter = require('./routes/apiRouter');
 // Settings
 var app = express()
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://heroku_vn3fwm62:illgmblsvfqod5lrk4j1cap1la@ds149800.mlab.com:49800/heroku_vn3fwm62');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
