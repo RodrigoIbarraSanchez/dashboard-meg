@@ -6,6 +6,7 @@ var path = require("path")
 var mongoose = require('mongoose')
 var bodyParser = require("body-parser")
 var cors = require('cors')
+var User = require('./models/user')
 
 var apiRouter = require('./routes/apiRouter');
 
@@ -32,28 +33,52 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use("/api", apiRouter)
 
-
 app.get('/', function (req, res) {
+    User.find({}, function(err, users) {
+        if (err) throw err;
+
+        res.render(
+            'index',
+            {
+                title: 'Dashboard',
+                users: users
+            })
+    });
+})
+
+
+/*app.get('/', function (req, res) {
+    User.find({}, function(err, users) {
+        if (err) throw err;
+
+        // object of all the users
+        console.log(users._id.firstName);
+    });
     res.render(
         'index',
         {
             title: 'Dashboard',
-            /*nombre_usuario: jsonContent.usuario_uno.first_name,
+            /!*nombre_usuario: jsonContent.usuario_uno.first_name,
             foto_perfil: jsonContent.usuario_uno.profile_pic,
             nombre: jsonContent.usuario_uno.first_name,
-            apellido: " " + jsonContent.usuario_uno.last_name*/
+            apellido: " " + jsonContent.usuario_uno.last_name*!/
         })
-})
+})*/
 app.get('/horario', function (req, res) {
-    res.render(
-        'horario',
-        {
-            title: 'Horario',
-            /*nombre_usuario: jsonContent.usuario_uno.first_name,
-            foto_perfil: jsonContent.usuario_uno.profile_pic,
-            nombre: jsonContent.usuario_uno.first_name,
-            apellido: " " + jsonContent.usuario_uno.last_name*/
-        })
+    User.find({}, function(err, users) {
+        if (err) throw err;
+
+        res.render(
+            'horario',
+            {
+                title: 'Horario',
+                users: users
+                /*nombre_usuario: jsonContent.usuario_uno.first_name,
+                 foto_perfil: jsonContent.usuario_uno.profile_pic,
+                 nombre: jsonContent.usuario_uno.first_name,
+                 apellido: " " + jsonContent.usuario_uno.last_name*/
+            })
+    });
 })
 app.get('/todos', function (req, res) {
     res.render(

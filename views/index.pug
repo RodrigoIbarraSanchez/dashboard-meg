@@ -15,7 +15,7 @@ html
                         div
                             a.logo
                                 img.fotoPerfil(src=foto_perfil)
-                                h4.nombre= nombre + apellido
+                                //h4.nombre=
                 ul.nav.nav-pills-pull-right
                     li.elements
                         a(href='/horario').fa-li.fa.fa-facebook Horario
@@ -25,12 +25,13 @@ html
                     |
                     li.elements
                         a(href='/goals') Goals
+
         div.right
             header
                 h3= title
 
-                form(action='/', method='post')
-                        input(type='email', name='email')
-                        |
-                        button(type='submit') Submit
+            .container
+                .row
+                    h1.firstItem= "Clases: "
+                    h2.firstItem= users[0].firstName
             //h3= nombre_usuario
